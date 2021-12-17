@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo Data Binding</title>
+</head>
+<body>
+    <h1 class="city">Hanoi, Vietnam - Longitude: -122 Latitude: 37</h1>
+    <h2 class="temp">Temperature: 18<sup>o</sup>C</h2>
+    <h2 class="hum">Humidity: 71%</h2>
+    <h2 class="pres">Pressure: 1023</h2>
+    <h2 class="wind">Wind speed: 1.5 km/h</h2>
+<script type="text/javascript" src="JS/jquery.js"></script>
+<script type="text/javascript">
+    $.ajax(
+        {
+            url: "https://api.openweathermap.org/data/2.5/weather?q=hanoi,vietnam&&units=metric&appid=09a71427c59d38d6a34f89b47d75975c",
+            method: "GET",
+            success: function (data){
+                var city = data.name;
+                var country = data.sys.country;
+                var long = data.coord.lon;
+                var lat = data.coord.lat;
+                var txt_city = city+", "+country+" - Longitude: "+long+" Latitude: "+lat;
+                var ct = $(".city");
+                ct.text(txt_city);
+                var tmp = data.main.temp;
+                $(".temp").html("Temperature: "+tmp+"<sup>o</sup>");
+            }
+        }
+    );
+    var data =
+
+        {
+            coord: {
+                lon: -122.08,
+                lat: 37.39
+            },
+            weather: [
+                {
+                    id: 800,
+                    main: "Clear",
+                    description: "clear sky",
+                    icon: "01d"
+                }
+            ],
+            base: "stations",
+            main: {
+                temp: 282.55,
+                feels_like: 281.86,
+                temp_min: 280.37,
+                temp_max: 284.26,
+                pressure: 1023,
+                humidity: 100
+            },
+            visibility: 16093,
+            wind: {
+                speed: 1.5,
+                deg: 350
+            },
+            clouds: {
+                all: 1
+            },
+            dt: 1560350645,
+            sys: {
+                type: 1,
+                id: 5122,
+                message: 0.0139,
+                country: "Vietnam",
+                sunrise: 1560343627,
+                sunset: 1560396563
+            },
+            timezone: -25200,
+            id: 420006353,
+            name: "Mountain View",
+            cod: 200
+        }
+
+
+</script>
+</body>
+</html>

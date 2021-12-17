@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo JS 3</title>
+</head>
+<body>
+    <button type="button" onclick="ON()">ON</button>
+    <button type="button" onclick="OFF()">OFF</button>
+    <button type="button" onclick="TOG()">TOGGLE</button>
+    <h1 id="tit" class="x1 x2">Demo jQuery</h1>
+    <p id="para">
+        Compressed and uncompressed copies of jQuery files are available. The uncompressed file is best used during development or debugging; the compressed file </br>
+        saves bandwidth and improves performance in production. You can also download a sourcemap file for use when debugging with a compressed file. The map file is not</br>
+        required for users to run jQuery, it just improves the developer's debugger experience. As of jQuery 1.11.0/2.1.0 the //# sourceMappingURL comment is not included</br>
+        in the compressed file.
+    </p>
+    <script type="text/javascript" src="JS/jquery.js"></script>
+    <script type="text/javascript">
+        var obj = $("#tit");
+        var obj2 = $(".x1");
+        obj.css("color","red");
+        obj2.css(
+            {
+                color:"green",
+                "background-color":"orange"
+            }
+        );
+
+        obj2.text("jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers. If you're new to jQuery, we recommend that you check out the jQuery Learning Center.");
+        console.log(obj2.text());
+
+        obj.html("<p>If you're updating to a newer version of jQuery, be sure to read the release notes published on our blog. If you're coming from a version prior 1.9, you should check out the 1.9 Upgrade Guide as well.</p>");
+        obj.append("<i>Note that this is the API documentation for jQuery core. Other projects have API docs in other locations:</i>");
+        obj.prepend("<i>Note that this is the API documentation for jQuery core. Other projects have API docs in other locations:</i>");
+
+        obj.addClass("x3");
+        obj.removeClass("x2");
+        if(obj.hasClass("x3")){
+            obj.addClass("x4");
+        }
+
+        var para = $("#para");
+        function ON(){
+            // para.show();
+            // para.fadeIn(500);
+            para.slideDown(500);
+        }
+
+        function OFF(){
+            // para.hide();
+            // para.fadeIn(500);
+            para.slideUp(500);
+        }
+
+        function TOG(){
+            // para.toggle();
+            // para.fadeToggle(500);
+            para.slideToggle(500);
+        }
+    </script>
+</body>
+</html>
