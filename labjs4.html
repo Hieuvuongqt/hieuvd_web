@@ -2,62 +2,84 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>labjs4</title>
-  <link rel="stylesheet" href="css/labjs4.css">
+  <title>Demo Forecase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/layout.css"/>
+  <link rel="stylesheet" href="css/forecast.css"/>
 </head>
 <body>
-<div id="content">
-  <div class="block">
-    <div class="timeanddate">
-      hello
+<header class="header section">
+  <div class="container">
+    <div class="logo">
+      <a href="#">Genesis Framework</a>
+      <p>Support HTML 5 & Responsive design</p>
     </div>
-    <div class="tempvsicon">
-      <div class="temp">nhiet do</div>
-      <div class="icon">icon</div>
-    </div>
-    <div class="discription">
-      discription
-    </div>
+    <ul class="toplinks">
+      <li><a href="#">Sample</a></li>
+      <li><a href="#">Layouts</a></li>
+      <li><a href="#">Templates</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
   </div>
+</header>
+<nav class="nav section">
+  <div class="container">
+    <ul class="menu">
+      <li><a href="#">Category #1</a> </li>
+      <li><a href="#">Category #2</a> </li>
+      <li><a href="#">Category #3</a> </li>
+      <li><a href="#">Category #4</a> </li>
+      <li class="last"><a href="#">Get Genesis Now!</a> </li>
+    </ul>
+  </div>
+</nav>
+<section class="main section">
+  <div class="container">
+    <article class="">
+      <div class="entry">
+        <ul class="forecast">
 
-</div>
+
+        </ul>
+      </div>
+    </article>
+
+  </div>
+</section>
+<footer class="footer section">
+  <div class="container">
+
+  </div>
+</footer>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript">
-  $.ajax(
-          {
-            url:"https://api.openweathermap.org/data/2.5/forecast?q=Hanoi,vietnam&appid=09a71427c59d38d6a34f89b47d75975c&units=metric",
-            method:"GET",
-            success:function (data) {
-              var bl=document.getElementById('content');
-              for(var i=0;i<data.list.length;i++){
-                bl.innerHTML=bl.innerHTML+'  <div class="block">\n' +
-                        '       <div class="timeanddate">\n' +
-                        '           hello\n' +
-                        '           </div>\n' +
-                        '           <div class="tempvsicon">\n' +
-                        '               <div class="temp">nhiet do</div>\n' +
-                        '               <div class="icon">icon</div>\n' +
-                        '           </div>\n' +
-                        '           <div class="discription">\n' +
-                        '           discription\n' +
-                        '           </div>\n' +
-                        '   </div>';
-                var date= data.list[i].dt_txt;
-                var td= document.getElementsByClassName('timeanddate');
-                td[i].innerHTML=(date);
-                var temp= data.list[i].main.temp;
-                var tp=document.getElementsByClassName('temp')
-                tp[i].innerHTML=( "Nhiệt độ: "+temp + "<sup>o</sup> C");
-                var icon = data.list[i].weather[0].icon;
-                var ic=document.getElementsByClassName('icon');
-                ic[i].innerHTML=('<img src="http://openweathermap.org/img/wn/'+icon+'@2x.png"/>');
-                var discrition = data.list[i].weather[0].description;
-                var dis=document.getElementsByClassName('discription')
-                dis[i].innerHTML=( "Miêu tả: "+discrition);
-              }
-            }
-          }
-  )
+  $.ajax({
+    url:"http://api.openweathermap.org/data/2.5/forecast",
+    data:{
+      q:"Hanoi,vietnam",
+      appid:"09a71427c59d38d6a34f89b47d75975c",
+      units:"metric"
+    },
+    method:"GET",
+    success:function (data){
+      var list = data.list;
+      for(var i=0;i<list.length;i++){
+        var timer = list[i].dt_txt;
+        var temp = list[i].main.temp;
+        var des = list[i].weather[0].description;
+        var icon = list[i].weather[0].icon;
+        var x = "<li>\n" +
+                "                        <h3 class=\"timer\">"+timer+"</h3>\n" +
+                "                        <h2 class=\"temp\"><span>"+temp+"</span><sup>o</sup>C</h2>\n" +
+                "                        <p>"+des+"</p>\n" +
+                "                        <img class=\"des\" src=\"http://openweathermap.org/img/wn/"+icon+"@2x.png\"/>\n" +
+                "                    </li>";
+        $(".forecast").append(x);
+      }
+    }
+  });
 </script>
 </body>
 </html>
